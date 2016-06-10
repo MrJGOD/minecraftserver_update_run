@@ -1,2 +1,3 @@
 # minecraftserver_update_run
-python script to grab the most recent minecraft server jar and run it
+python script to update minecraft server, grabs the most recent minecraft jar and runs it
+
