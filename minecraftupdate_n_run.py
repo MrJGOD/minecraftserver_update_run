@@ -14,11 +14,17 @@ currentver = thelatest["release"]
 toget = "https://s3.amazonaws.com/Minecraft.Download/versions/" + currentver + "/minecraft_server." + currentver + ".jar"
 #this is the .jar file with the latest version
 
-subprocess.call(["wget", "-q", toget]) #grabs the latest .jar
+filelist = subprocess.check_output("ls", universal_newlines=True) #does a search of the directory
+filelist = filelist.split() #splits the string and makes it a list, easier to search
+
 
 listo = toget.split("/")
 end = len(listo)
 thefile = listo[end-1]
+
+#only gets the new version of the server if you dont already have it
+if thefile not in filelist:
+        subprocess.call(["wget", "-q", toget])
 
 subprocess.call(["nohup java -Xms1G -Xmx1G -jar {} nogui &".format(thefile)],shell=True)
 #runs the server with nohangup and in the background so you can start it remotely
